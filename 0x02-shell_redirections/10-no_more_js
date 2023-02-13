@@ -1,2 +1,2 @@
 #!/bin/bash
-rm $(find . -type f -iname "*.js" -print)
+rm $(find . -type f -name "*.js")
