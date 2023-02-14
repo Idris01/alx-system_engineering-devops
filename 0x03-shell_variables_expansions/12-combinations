@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for x in {a..z}{a..z}
+do 
+	 if [[ $x != "oo" ]]
+	 then echo "$x"
+	 fi
+done
