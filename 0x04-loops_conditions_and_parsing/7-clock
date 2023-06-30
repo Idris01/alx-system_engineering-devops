@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Print time for 12 hours and 59 minutes
+
+hour=0
+minutes=1
+
+while [ "$hour" -le 12 ]
+do
+	echo "Hour: $(( hour++ ))"
+
+	while (( "$minutes" <= 59 ))
+	do
+		echo "$(( minutes++ ))"
+	done
+	minutes=1  # reset value
+done
