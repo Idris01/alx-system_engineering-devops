@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Print the name after the first "-" for each non-hidden filename in the current directory
 
-visible_files=$(find . | cut -d "-" -f2)
+visible_files=$(find . | cut -s -d "-" -f2)
 
 for file in $visible_files
 do
-	echo "$file"
+	basename "$file"
 done
