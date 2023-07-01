@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Display "To infinity and beyond" at 2 seconds interval
+flag=1
+while [ "$flag" -eq 1 ]
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
