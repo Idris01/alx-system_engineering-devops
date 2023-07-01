@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Terminate the "4-to_infinity_and_beyond" script
+
+name="4-to_infinity_and_beyond"
+pid=$(pgrep -a bash | grep $name | cut -d " " -f1)
+
+if [[ -n "$pid" ]]
+then
+	kill "$pid"
+fi
