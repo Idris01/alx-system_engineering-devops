@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Terminate script using "SIGTERM"
+name=4-to_infinity_and_beyond
+pid=$(pgrep -a bash | grep "$name" | cut -d " " -f1)
+
+if [[ -n "$pid" ]]
+then
+	pkill --ns "$pid"
+fi
