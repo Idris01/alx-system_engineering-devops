@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # print all running processes
 
-ps aux
+ps ux
