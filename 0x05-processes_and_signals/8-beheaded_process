@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Kills the "7-highlander" script 
+name="7-highlander"
+pid=$(pgrep -a bash| grep "$name" | cut -d" " -f1)
+
+if [ -n "$pid" ]
+then
+	kill -s SIGKILL "$pid"
+fi
