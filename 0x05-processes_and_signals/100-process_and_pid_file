@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Create a "Process and PID file"
+
+file_name="/var/run/myscript.pid"
+echo $$ > "$file_name"
+
+handle_terminate() # called to handle SIGTERM
+{
+	echo "I hate the kill command"
+	rm -f $file_name
+	exit 0
+}
+
+handle_quit()  # called to handle SIGQUIT
+{
+	rm -f $file_name
+	exit 0
+}
+
+handle_interrupt() # called to handle SIGINT
+{
+	echo "Y U no love me?!"
+}
+
+trap 'handle_interrupt' 2
+trap 'handle_terminate' 15
+trap 'handle_quit' 3
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
