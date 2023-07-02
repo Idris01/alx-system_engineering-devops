@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Display username, user_id and file path for eachuser in /etc/passwd
+
+while read -r line
+do
+	echo "$line" | cut -d":" -f1,3,6
+done < /etc/passwd
