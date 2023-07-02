@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Controls "manage_my_process" script
+error_msg="Usage: manage_my_process {start|stop|restart}"
+action=$1
+pid="/var/run/my_process.pid"
+process_file="manage_my_process"
+
+start() # start the process
+{
+	"./$process_file" &
+	echo $! > "$pid"
+	echo "$process_file started"
+}
+
+stop()  # stop the process
+{
+	kill -s SIGKILL "$(cat $pid)"
+	rm -f "$pid"
+	echo "$process_file stopped"
+}
+
+restart()  # restart process
+{
+	if [ -e "$pid" ]
+	then
+		kill -s SIGKILL "$(cat $pid)"
+		rm -f "$pid"
+	fi
+	"./$process_file" &
+	echo $! > "$pid"
+	echo "$process_file restarted"
+}
+	
+case "X$action" in
+	"Xstart")
+		start
+		;;
+	"Xstop")
+		stop
+		;;
+	"Xrestart")
+		restart
+		;;
+	*)
+		echo "$error_msg"
+		;;
+esac
