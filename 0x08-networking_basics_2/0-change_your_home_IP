@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# change hosts file
+
+host_file="/etc/hosts"
+temp_file="./host_temp"
+addr="127.0.0.1\s+localhost"
+cat "$host_file"| grep -vE "$addr" > "$temp_file"
+
+echo "127.0.0.2	localhost" >> "$temp_file"
+echo "8.8.8.8	facebook.com" >> "$temp_file"
+cat "$temp_file" > "$host_file"
+rm "$temp_file"
