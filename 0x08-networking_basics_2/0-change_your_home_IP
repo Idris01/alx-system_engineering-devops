@@ -3,7 +3,7 @@
 
 host_file="/etc/hosts"
 temp_file="./host_temp"
-addr="127.0.0.1\s+localhost"
+addr="127.0.0.1\s+localhost|.*\s+facebook"
 cat "$host_file"| grep -vE "$addr" > "$temp_file"
 
 echo "127.0.0.2	localhost" >> "$temp_file"
