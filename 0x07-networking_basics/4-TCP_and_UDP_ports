@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Displays Listening port of socket
+netstat -pl
