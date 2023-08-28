@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# create an ssh key pair named school
+ssh-keygen -t rsa -b 4096 -f "school" -N "betty"
