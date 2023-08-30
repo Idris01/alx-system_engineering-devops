@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# install nginx on a new server and configure a redirect page
+sudo apt update
+sudo apt install nginx -y
+
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+sudo tee /etc/nginx/sites-available/my-nginx-config > /dev/null <<EOT
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html;
+
+    location /redirect_to {
+        return 301 http://www.idrisoft.tech;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOT
+
+# Create a symbolic link to enable the configuration
+sudo ln -s /etc/nginx/sites-available/my-nginx-config /etc/nginx/sites-enabled/
+
+# Remove  default configuration
+sudo rm /etc/nginx/sites-enabled/default
+
+# restart nginx
+sudo nginx -s reload
