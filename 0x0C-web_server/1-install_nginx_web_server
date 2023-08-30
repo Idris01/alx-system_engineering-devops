@@ -2,7 +2,6 @@
 # install nginx on a server
 sudo apt update
 sudo apt install nginx -y
-sudo chown -R "$USER":"$USER" /var/www/html/*.html
-echo "Hello World!" > /var/www/html/*.html
-sudo nginx -s reload
+echo  "Hello World!" |sudo tee  /var/www/html/index.html > /dev/null
+sudo service nginx restart
 sudo curl localhost
