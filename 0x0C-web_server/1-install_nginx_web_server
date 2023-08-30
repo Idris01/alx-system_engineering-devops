@@ -5,3 +5,4 @@ sudo apt install nginx -y
 sudo chown -R "$USER":"$USER" /var/www/html/*.html
 echo "Hello World!" > /var/www/html/*.html
 sudo nginx -s reload
+curl localhost
