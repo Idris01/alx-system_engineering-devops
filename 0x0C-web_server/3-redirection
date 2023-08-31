@@ -4,12 +4,14 @@ sudo apt update
 sudo apt install nginx -y
 
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
-sudo tee /etc/nginx/sites-available/my-nginx-config > /dev/null <<EOT
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOT
 server {
     listen 80;
     server_name _;
 
     root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
 
     location /redirect_me {
         return 301 http://www.idrisoft.tech;
@@ -20,12 +22,7 @@ server {
     }
 }
 EOT
-
-# Create a symbolic link to enable the configuration
-sudo ln -s /etc/nginx/sites-available/my-nginx-config /etc/nginx/sites-enabled/
-
-# Remove  default configuration
-sudo rm /etc/nginx/sites-enabled/default
-
 # restart nginx
-sudo nginx -s reload
+sudo service nginx restart
+sudo curl localhost
+sudo curl localhost/redirect_me
