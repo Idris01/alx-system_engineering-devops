@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# install nginx on a new server and configure a redirect page
+# also configure a custom 404 page
+
+sudo apt update
+sudo apt install nginx -y
+
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html > /dev/null
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOT
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
+
+    location /redirect_me {
+        return 301 http://www.idrisoft.tech;
+    }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+	root /usr/share/nginx/html;
+	internal;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOT
+# restart nginx
+sudo service nginx restart
+sudo curl localhost
+sudo curl localhost/redirect_me
