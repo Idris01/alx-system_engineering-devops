@@ -2,6 +2,20 @@ class nginx_installation {
     package { 'nginx':
 	ensure => 'installed',
     }
+    
+    file { '/var/www/html/index.html':
+	ensure => 'present',
+	owner => 'root',
+	group => 'root',
+	content => "Hello World!",
+	}
+
+    file { '/usr/share/nginx/html/custom_404.html':
+	ensure => 'present',
+	owner => 'root',
+	group => 'root',
+	content => "Ceci n'est pas une page",
+	}
 
     file { '/etc/nginx/sites-available/default':
 	ensure => 'file',
@@ -15,7 +29,7 @@ server {
 
     root /var/www/html;
 
-    add_header X-Served-By $HOSTNAME;
+    add_header X-Served-By \$HOSTNAME;
 
     index index.html index.htm index.nginx-debian.html;
 
