@@ -9,6 +9,7 @@ class nginx_installation {
 	ensure => 'present',
 	owner => 'root',
 	group => 'root',
+        require => Package['nginx'],
 	content => "Hello World!",
 	}
 
@@ -16,6 +17,7 @@ class nginx_installation {
 	ensure => 'present',
 	owner => 'root',
 	group => 'root',
+        require => Package['nginx'],
 	content => "Ceci n'est pas une page",
 	}
 
@@ -23,6 +25,7 @@ class nginx_installation {
 	ensure => 'file',
 	owner => 'root',
 	group => 'root',
+        require => Package['nginx'],
 	content => "
 
 server {
