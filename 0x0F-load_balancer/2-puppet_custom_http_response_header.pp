@@ -1,3 +1,5 @@
+# configure a new ubuntu server to install with nginx and set custom header
+
 class nginx_installation {
     package { 'nginx':
 	ensure => 'installed',
