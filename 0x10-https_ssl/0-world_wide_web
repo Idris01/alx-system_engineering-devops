@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Takes two arguments doman and subdomain then print out information
+# about both
+
+print_domain_info () {
+	items=$(dig "$2.$1"  | grep -E "[0-9]+\s+IN"| awk '{print $4, $5}')
+	items=($items)
+	echo "The subdomain $2 is a ${items[0]} record and points to ${items[1]}"
+}
+
+if [ "$#" = 2 ]
+then
+	print_domain_info "$1" "$2"
+else
+	items=("www" "lb-01" "web-01" "web-02")
+	for item in "${items[@]}"; do
+		print_domain_info "$1" "$item"
+	done
+fi
