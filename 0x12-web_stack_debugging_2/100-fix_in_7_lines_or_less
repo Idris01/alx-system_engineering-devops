@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# configures nginx to run as nginx and serving on port 8080
+sudo chown -R nginx:nginx /etc/nginx
+sudo chmod u+wr /etc/nginx/nginx.conf
+su nginx -c "service nginx restart"
