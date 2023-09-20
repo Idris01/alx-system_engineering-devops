@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Create a compressed version of database backup
+sudo mysqldump -u root  --all-databases > backup.sql
+sudo tar -zcvf "$(date +%d-%m-%Y)-tar.gz" backup.sql
