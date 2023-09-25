@@ -5,8 +5,8 @@ The userId is supplied as the first argument to the script,
 then the corresppomding user's todo is fetched while those completed are listed
 """
 import json
-from urllib import request
 import sys
+from urllib import request
 
 
 if __name__ == '__main__':
@@ -25,4 +25,4 @@ if __name__ == '__main__':
         user.get('name'), sum(done), len(todos)))
     for todo in todos:
         if todo['completed']:
-            print("\t{}".format(todo.get("title")))
+            print("\t {}".format(todo.get("title")))
