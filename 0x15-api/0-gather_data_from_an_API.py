@@ -8,11 +8,12 @@ import json
 from urllib import request
 import sys
 
-url1 = "https://jsonplaceholder.typicode.com/users/{}/todos".format(
-        sys.argv[1])
-url2 = "https://jsonplaceholder.typicode.com/users/{}".format(sys.argv[1])
 
 if __name__ == '__main__':
+    url1 = "https://jsonplaceholder.typicode.com/users/{}/todos".format(
+        sys.argv[1])
+    url2 = "https://jsonplaceholder.typicode.com/users/{}".format(sys.argv[1])
+
     resp1 = request.urlopen(url1)
     resp2 = request.urlopen(url2)
 
