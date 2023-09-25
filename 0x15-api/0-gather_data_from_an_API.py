@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-'''This Module Fetch todos of a given user from an API
-and then print a formated output of the
-completed todos while also showing the proprtion of the completed tasks
-'''
+"""This Module Fetch todos of a given user.
+
+The userId is supplied as the first argument to the script,
+then the corresppomding user's todo is fetched while those completed are listed
+"""
 import json
-import urllib.request as request
+from urllib import request
 import sys
 
 url1 = "https://jsonplaceholder.typicode.com/users/{}/todos".format(
