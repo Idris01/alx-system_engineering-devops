@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Fetch todos of a given user
+"""This Module Fetch todos of a given user from an API
+and then print a formated output of the
+completed todos while also showing the proprtion of the completed tasks
 """
 import urllib.request as request
 import json
