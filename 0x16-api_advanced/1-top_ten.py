@@ -16,9 +16,11 @@ def top_ten(subreddit):
                 url_template.format(subreddit),
                 headers={'User-Agent': 'idrisoft'},
                 allow_redirects=False)
+        if resp.status_code > 299:
+            raise Exception('redirect occur')
         data = resp.json()
         for post in data['data']['children']:
-            print(post['data'].get('title'))
+            print(post['data']['title'])
     except Exception as e:
         print('None')
 
