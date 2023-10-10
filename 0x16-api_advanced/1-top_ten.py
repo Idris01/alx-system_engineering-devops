@@ -2,7 +2,6 @@
 """Prints title of top ten posts of a given reddit
 """
 
-import json
 import requests
 import sys
 
@@ -17,11 +16,11 @@ def top_ten(subreddit):
                 url_template.format(subreddit),
                 headers={'User-Agent': 'idrisoft'},
                 allow_redirects=False)
-        data = json.loads(resp.text)
+        data = resp.json()
         for post in data['data']['children']:
             print(post['data'].get('title'))
     except Exception as e:
-        print(None)
+        print('None')
 
 
 if __name__ == '__main__':
