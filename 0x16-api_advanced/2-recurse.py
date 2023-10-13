@@ -9,7 +9,7 @@ import sys
 def recurse(subreddit, after=None):
     """Prints title of top ten posts of a subreddit
     """
-    url_template = 'https://www.reddit.com/r/{}/top.json{}'
+    url_template = 'https://www.reddit.com/r/{}/hot.json{}'
     titles = []
     new_after = ""
 
