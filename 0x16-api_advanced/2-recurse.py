@@ -36,7 +36,3 @@ def recurse(subreddit, after=None):
         return titles.extend(recurse(subreddit, new_after))
 
     return titles
-
-
-if __name__ == '__main__':
-    print(recurse(sys.argv[1]))
