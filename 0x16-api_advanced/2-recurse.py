@@ -10,14 +10,14 @@ def recurse(subreddit, after=None):
     """Prints title of top ten posts of a subreddit
     """
     url_template = 'https://www.reddit.com/r/{}/top.json{}'
+    titles = []
+    new_after = ""
 
-		titles = []
-		new_after = ""
     try:
-		    url = url_template.format(
-				    subreddit,
-						"" if after is None else (
-						"?after=" + after))
+        url = url_template.format(
+                subreddit,
+                "" if after is None else (
+                    "?after=" + after))
         resp = requests.get(
                 url,
                 headers={'User-Agent': 'idrisoft'},
@@ -25,17 +25,18 @@ def recurse(subreddit, after=None):
         if resp.status_code > 299:
             raise Exception('redirect occur')
         data = resp.json()
-				new_after = data['data']['after']
+        new_after = data['data']['after']
 
         for post in data['data']['children']:
             titles.append(post['data']['title'])
     except Exception as e:
         return 'None'
 
-		if new_after:
-				return titles.extend(recurse(
-					subreddit, new_after))
-		return titles
+    if new_after:
+        return titles.extend(recurse(subreddit, new_after))
+
+    return titles
+
 
 if __name__ == '__main__':
     print(recurse(sys.argv[1]))
