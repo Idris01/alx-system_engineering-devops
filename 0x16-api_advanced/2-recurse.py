@@ -11,28 +11,27 @@ def recurse(subreddit, after=None):
     """
     url_template = 'https://www.reddit.com/r/{}/hot.json{}'
     titles = []
-    new_after = ""
+    new_after = None
 
     try:
         url = url_template.format(
                 subreddit,
                 "" if after is None else (
                     "?after=" + after))
+        print(url)
         resp = requests.get(
                 url,
                 headers={'User-Agent': 'idrisoft'},
                 allow_redirects=False)
-        if resp.status_code > 299:
-            raise Exception('redirect occur')
         data = resp.json()
         new_after = data['data']['after']
-
-        for post in data['data']['children']:
-            titles.append(post['data']['title'])
+        titles.extend(list(
+            post['data']['title'] for post in
+            data['data']['children']))
     except Exception as e:
         return 'None'
 
-    if new_after:
+    if new_after is not None:
         titles.extend(recurse(subreddit, new_after))
         return titles
 
