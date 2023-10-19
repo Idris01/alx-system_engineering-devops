@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Set gunicorn to relaod gracefully
+items="$(ps aux | awk '/Ss/ && /gunicorn/ {print $2}'| head -n -1| tr '\n' ' ')"
+data=${items:-none}
+if [ "$data" != "none" ]
+then
+	for itm in $items
+	do
+		kill -HUP "$itm"
+	done
+fi
