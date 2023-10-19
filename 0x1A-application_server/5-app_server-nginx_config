@@ -1,0 +1,42 @@
+
+server {
+	listen 80;
+	server_name _;
+	root /var/www/html;	
+	
+	add_header X-Served-By $HOSTNAME;
+	
+	location /redirect_me {
+		return 301 https://blog.idrisoft.tech;
+	}
+	
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+
+	location /static {
+		alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static;
+	}
+
+	location / {
+		proxy_pass http://127.0.0.1:5003/2-hbnb/;
+	}
+
+	location /hbnb_static/ {
+		alias /data/web_static/current/;
+	}
+
+	location /airbnb-onepage/ {
+		proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+	}
+
+	location ~ ^/airbnb-dynamic/number_odd_or_even/(?<numb>\d+)$ {
+		proxy_pass "http://127.0.0.1:5001/number_odd_or_even/$numb";
+	}
+	
+	location /api/ {
+		proxy_pass http://127.0.0.1:5002/api/;
+	}
+}
